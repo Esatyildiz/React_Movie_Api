@@ -1,59 +1,57 @@
 import React, { useEffect, useState } from 'react';
-import { fetchDataFromApi } from '../../../utils/api';
-import TrendCarousel from './TrendCarousel';
+import { topRotatedFetchApi } from '../../../utils/api';
+import TopRotadetCarousel from './TopRotadetCarousel';
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
+    return classes.filter(Boolean).join('')
 }
 
-
-const Trending = () => {
-
-    const [movieTrend, setmovieTrend] = useState([]);
-    const [movieTrendDay, setmovieTrendDay] = useState([]);
-    const [activeTab, setActiveTab] = useState(0);
+const TopRotadet = () => {
+    const [topMovies, setTopMovies] = useState([]);
+    const [topMoviesDay, setTopMoviesDay] = useState([]);
+    const [activeTopTab, setActiveTopTab] = useState(0);
     const [clickDay, setClickDay] = useState(false);
     const [clickWeek, setClickWeek] = useState(false);
 
+
     useEffect(() => {
-        const fetchData = async () => {
+        const fetcRotadedApi = async () => {
             try {
-                if (activeTab === 0 && !clickDay) {
-                    const result = await fetchDataFromApi("day");
-                    setmovieTrendDay(result);
+                if (activeTopTab === 0 && !clickDay) {
+                    const result = await topRotatedFetchApi("day");
+                    setTopMoviesDay(result);
                     setClickDay(true);
-                } else if (activeTab === 1 && !clickWeek) {
-                    const result = await fetchDataFromApi("week");
-                    setmovieTrend(result);
+                } else if (activeTopTab === 1 && !clickWeek) {
+                    const result = await topRotatedFetchApi("week");
+                    setTopMovies(result);
                     setClickWeek(true);
                 }
             } catch (error) {
                 console.log(error);
             }
-        };
-        fetchData();
-    }, [activeTab, clickDay, clickWeek]);
-
-
+        }
+        fetcRotadedApi();
+    }, [activeTopTab, clickDay, clickWeek]);
 
     const tabClasses = (index) =>
         classNames(
             'h-full flex items-center justify-center w-[100px] rounded-[15px]  text-sm relative z-10 cursor-pointer ease-out duration-200',
-            activeTab === index ? "text-white" : "text-[#04152d]"
+            activeTopTab === index ? "text-white" : "text-[#04152d]"
         );
 
     const panelClasses = classNames(
         '',
         ''
     );
+
     const handleTabClick = (index) => {
-        setActiveTab(index);
-    };
+        setActiveTopTab(index);
+    }
 
     return (
-        <div className='container mb-28'>
-            <div className='flex justify-between mb-5'>
-                <span className='text-white text-2xl font-normal'>Trend</span>
+        <div className='container'>
+            <div className='flex justify-between'>
+                <span className='text-white text-2xl font-normal'>En Çok Oy Alan</span>
                 <div className="h-[34px] bg-white rounded-[20px] p-[2px]">
                     <div className="flex items-center h-[30px] relative">
                         <button
@@ -71,22 +69,22 @@ const Trending = () => {
                         <div
                             className={classNames(
                                 'h-[30px] w-[100px] rounded-[15px] absolute left-0 transition-all duration-100  bg-tabGradient cubic-bezier',
-                                activeTab === 0 ? '' : 'left-[100px]'
+                                activeTopTab === 0 ? '' : 'left-[100px]'
                             )}
                         />
                     </div>
                 </div>
             </div>
-            <div className="mt-2">
-                <div className={activeTab === 0 ? panelClasses : 'hidden'}>
-                    <TrendCarousel movies={movieTrendDay} />
+            <div className='mt-2'>
+                <div className={activeTopTab === 0 ? panelClasses : 'hidden'}>
+                    <TopRotadetCarousel topMovies={topMoviesDay} />
                 </div>
-                <div className={activeTab === 1 ? panelClasses : 'hidden'}>
-                    <TrendCarousel movies={movieTrend} />
+                <div className={activeTopTab === 1 ? panelClasses : 'hidden'}>
+                    <TopRotadetCarousel topMovies={topMovies} />
                 </div>
             </div>
         </div>
     );
 };
 
-export default Trending;
+export default TopRotadet;

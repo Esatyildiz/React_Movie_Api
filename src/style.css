@@ -1,0 +1,68 @@
+.CircularProgressbar {
+    width: 100%;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 100%;
+    padding: 2px;
+    margin-top: -50px;
+    z-index: 99999;
+    margin-left: 12px;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+    stroke: #3e98c7;
+    stroke-linecap: round;
+    -webkit-transition: stroke-dashoffset .5s ease 0s;
+    transition: stroke-dashoffset .5s ease 0s
+}
+
+.CircularProgressbar .CircularProgressbar-trail {
+    stroke: #d6d6d6;
+    stroke-linecap: round
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+    fill: #3e98c7;
+    font-size: 20px;
+    text-anchor: middle
+}
+
+.CircularProgressbar .CircularProgressbar-background {
+    fill: #d6d6d6
+}
+
+.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-background {
+    fill: #3e98c7
+}
+
+.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-text {
+    fill: #fff
+}
+
+.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-path {
+    stroke: #fff
+}
+
+.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
+    stroke: transparent
+}
+
+.circleRating {
+    background-color: var(--black);
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.circleRating .CircularProgressbar-text {
+    font-size: 34px;
+    font-weight: 700;
+    fill: var(--black)
+}
+
+.circleRating .CircularProgressbar-trail {
+    stroke: transparent
+}

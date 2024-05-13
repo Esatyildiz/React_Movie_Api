@@ -14,6 +14,9 @@ const Header = () => {
                     <li className='h-16 flex items-center mx-4 relative font-medium cursor-pointer text-white'>
                         <Icon name="search" />
                     </li>
+                    <li>
+                        <a className='text-white' href='/login'>Giriş Yap</a>
+                    </li>
                 </ul>
             </div>
         </header>

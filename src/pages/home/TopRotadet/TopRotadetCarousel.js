@@ -1,18 +1,18 @@
 import React from 'react';
 import { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import '.././../../carousel.css'
+import '.././../../carousel.css';
 
 // swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import CircleRating from '../circleRating/CircleRating';
-import Genres from '../../../components/Genres/Genres';
 
-const TrendCarousel = ({ movies }) => {
+const TopRotadetCarousel = ({ topMovies }) => {
 
     const path = "https://www.themoviedb.org/t/p/w440_and_h660_face";
+
     return (
         <div>
             <Swiper
@@ -39,16 +39,15 @@ const TrendCarousel = ({ movies }) => {
                 mousewheel="false"
 
             >
-                {movies && movies?.map((movie) => (
-                    <SwiperSlide key={movie.id}>
+                {topMovies.map((movieTitle) => (
+                    <SwiperSlide key={movieTitle.id}>
                         <div className=''>
                             <div className='rounded-xl mb-4 cursor-pointer relative  overflow-hidden after:absolute after:top-0 after:left-0 after:w-full after:h-full after:rounded-xl after:bg-black after:bg-opacity-40 '>
-                                <img src={`${path}${movie?.poster_path}`} className='w-full' alt={movie?.title} width="216" height="324" />
-                                <Genres data={movie?.genre_ids.slice(0, 3)} />
+                                <img src={`${path}${movieTitle?.poster_path}`} className='w-full' alt={movieTitle?.title} width="216" height="324" />
                             </div>
-                            <CircleRating rating={movie?.vote_average.toFixed(1)} />
-                            <a href="#!" className='text-white font-medium text-xl line-clamp-1 mb-1' alt={movie?.title}>{movie?.title}</a>
-                            <span className='text-sm text-white text-opacity-50 font-medium'>{movie?.release_date}</span>
+                            <CircleRating rating={movieTitle?.vote_average.toFixed(1)} />
+                            <a href="#!" className='text-white font-medium text-xl line-clamp-1 mb-1' alt={movieTitle?.title}>{movieTitle?.title}</a>
+                            <span className='text-sm text-white text-opacity-50 font-medium'>{movieTitle?.release_date}</span>
                         </div>
                     </SwiperSlide>
                 ))}
@@ -57,4 +56,4 @@ const TrendCarousel = ({ movies }) => {
     );
 };
 
-export default TrendCarousel;
+export default TopRotadetCarousel;

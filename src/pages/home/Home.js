@@ -1,5 +1,7 @@
 import React from 'react';
 import Banner from './heroBanner/Banner';
+import Popular from './popular/Popular';
+import TopRotadet from './TopRotadet/TopRotadet';
 import Trending from './trending/Trending';
 
 const Home = () => {
@@ -7,6 +9,8 @@ const Home = () => {
         <>
             <Banner />
             <Trending />
+            <Popular />
+            {/* <TopRotadet /> */}
         </>
     );
 };
