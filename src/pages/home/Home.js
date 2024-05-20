@@ -10,7 +10,7 @@ const Home = () => {
             <Banner />
             <Trending />
             <Popular />
-            {/* <TopRotadet /> */}
+            <TopRotadet />
         </>
     );
 };

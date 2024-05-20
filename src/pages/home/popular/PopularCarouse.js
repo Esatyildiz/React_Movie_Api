@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import CircleRating from '../circleRating/CircleRating';
+import Genres from '../../../components/Genres/Genres';
 
 
 
@@ -59,6 +60,7 @@ const PopularCarouse = ({ data: movies, isLoading }) => {
                             <div className=''>
                                 <div className='rounded-xl mb-4 cursor-pointer relative  overflow-hidden after:absolute after:top-0 after:left-0 after:w-full after:h-full after:rounded-xl after:bg-black after:bg-opacity-40 '>
                                     <img src={`${path}${movie?.poster_path}`} className='w-full' alt={movie?.title} width="216" height="324" />
+                                    <Genres data={movie?.genre_ids.slice(0, 3)} />
                                 </div>
                                 <CircleRating rating={movie?.vote_average.toFixed(1)} />
                                 <a href="#!" className='text-white font-medium text-xl line-clamp-1 mb-1' alt={movie?.title || movie?.name}>{movie?.title || movie?.name}</a>

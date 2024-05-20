@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useFetch from '../../../hooks/useFetch';
+import { fetchDataApi } from '../../../utils/api';
 // import { popularFetchApi } from '../../../utils/api';
 import PopularCarouse from './PopularCarouse';
 function classNames(...classes) {
@@ -8,34 +9,36 @@ function classNames(...classes) {
 
 
 const Popular = () => {
+
+
+    const [tabs, setTab] = useState([
+        { id: 1, title: "Filmler", data: false, url: "/movie/popular" },
+        { id: 2, title: "Tv Programları", data: false, url: "/tv/popular" }
+    ]);
     // const [movies, setMovies] = useState([]);
     // const [moviesDay, setMoviesDay] = useState([]);
+
     const [activeTab, setActiveTab] = useState(0);
-    const [clickTv, setClickTv] = useState(false);
-    const [clickMovie, setClickMovie] = useState(false);
-
-    const [popularData, setPopularData] = useState("movie");
-    const { data, isLoading } = useFetch(`/${popularData}/popular`);
-
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                if (activeTab === 0 && !clickMovie) {
-                    setPopularData("movie")
-                    setClickMovie(true);
-                    setClickTv(false);
-                } else if (activeTab === 1 && !clickTv) {
-                    setPopularData("tv")
-                    setClickTv(true);
-                    setClickMovie(false);
-                }
-            } catch (error) {
-                console.log(error);
+            let activeTabItem = tabs[activeTab];
+            if (!activeTabItem.data) {
+                await fetchDataApi(activeTabItem.url)
+                    .then((res) => {
+                        let oldTabs = tabs;
+                        oldTabs[activeTab].data = res.data
+                        setTab([...oldTabs]);
+                    }).catch((err) => {
+                        // setError("Bir şeyler yanlış gitti!");
+                        // setIsloading(false);
+                    })
             }
         };
         fetchData();
-    }, [activeTab, clickTv, clickMovie]);
+    }, [activeTab, tabs]);
+
+
 
 
     const tabClasses = (index) =>
@@ -44,15 +47,10 @@ const Popular = () => {
             activeTab === index ? "text-white" : "text-[#04152d]"
         );
 
-    const panelClasses = classNames(
-        '',
-        ''
-    );
     const handleTabClick = (index) => {
-        setTimeout(() => {
-            setActiveTab(index);
-        }, 250)
+        setActiveTab(index);
     };
+
 
     return (
         <div className='container mb-12'>
@@ -60,18 +58,15 @@ const Popular = () => {
                 <span className='text-white text-2xl font-normal'>Popüler Olanlar</span>
                 <div className="h-[34px] bg-white rounded-[20px] p-[2px]">
                     <div className="flex items-center h-[30px] relative">
-                        <button
-                            className={tabClasses(0)}
-                            onClick={() => handleTabClick(0)}
+                        {tabs.map((tab, index) => <button
+                            key={tab.id}
+                            className={tabClasses(index)}
+                            onClick={() => handleTabClick(index)}
                         >
-                            Filmler
-                        </button>
-                        <button
-                            className={tabClasses(1)}
-                            onClick={() => handleTabClick(1)}
-                        >
-                            Tv Programları
-                        </button>
+                            {tab.title}
+                        </button>)}
+
+
                         <div
                             className={classNames(
                                 'h-[30px] w-[100px] rounded-[15px] absolute left-0 transition-all duration-100  bg-tabGradient cubic-bezier',
@@ -82,11 +77,8 @@ const Popular = () => {
                 </div>
             </div>
             <div className="mt-2">
-                <div className={activeTab === 0 ? panelClasses : 'hidden'}>
-                    <PopularCarouse isLoading={isLoading} data={data?.data?.results} />
-                </div>
-                <div className={activeTab === 1 ? panelClasses : 'hidden'}>
-                    <PopularCarouse isLoading={isLoading} data={data?.data?.results} />
+                <div>
+                    <PopularCarouse isLoading={false} data={tabs[activeTab].data?.results} />
                 </div>
             </div>
         </div>
