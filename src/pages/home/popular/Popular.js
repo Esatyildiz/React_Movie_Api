@@ -10,13 +10,10 @@ function classNames(...classes) {
 
 const Popular = () => {
 
-
     const [tabs, setTab] = useState([
-        { id: 1, title: "Filmler", data: false, url: "/movie/popular" },
-        { id: 2, title: "Tv Programları", data: false, url: "/tv/popular" }
+        { id: 1, title: "Filmler", title2: "movie", data: false, url: "/movie/popular" },
+        { id: 2, title: "Tv Programları", title2: "Tv", data: false, url: "/tv/popular" }
     ]);
-    // const [movies, setMovies] = useState([]);
-    // const [moviesDay, setMoviesDay] = useState([]);
 
     const [activeTab, setActiveTab] = useState(0);
 
@@ -51,6 +48,7 @@ const Popular = () => {
         setActiveTab(index);
     };
 
+    const endPoint = tabs[activeTab].title2.trim().replace(/\s+/g, '-').toLowerCase();
 
     return (
         <div className='container mb-12'>
@@ -78,7 +76,7 @@ const Popular = () => {
             </div>
             <div className="mt-2">
                 <div>
-                    <PopularCarouse isLoading={false} data={tabs[activeTab].data?.results} />
+                    <PopularCarouse isLoading={false} endPoint={endPoint} data={tabs[activeTab].data?.results} />
                 </div>
             </div>
         </div>

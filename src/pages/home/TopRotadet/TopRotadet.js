@@ -17,7 +17,7 @@ const TopRotadet = () => {
     useEffect(() => {
         const fetchDataTopRated = async () => {
             const activeTab = tabs[activeTopTab];
-            console.log(activeTab);
+
             if (!activeTab?.data) {
                 try {
                     const res = await fetchDataApi(activeTab.url);

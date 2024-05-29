@@ -9,11 +9,23 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import CircleRating from '../circleRating/CircleRating';
 import Genres from '../../../components/Genres/Genres';
+import { useNavigate } from 'react-router-dom';
 
 
 
-const PopularCarouse = ({ data: movies, isLoading }) => {
+
+const PopularCarouse = ({ data: movies, isLoading, endPoint }) => {
     const path = "https://www.themoviedb.org/t/p/w440_and_h660_face";
+
+    const navigate = useNavigate();
+
+    // console.log(movies);
+    // const handleClick = (id) => {
+    //     navigate(`/detail/${id}`)
+    // }
+
+
+
 
     // loading skeleton method
     const skItem = () => {
@@ -57,7 +69,7 @@ const PopularCarouse = ({ data: movies, isLoading }) => {
                 >
                     {movies?.map((movie) => (
                         <SwiperSlide key={movie?.id}>
-                            <div className=''>
+                            <div onClick={() => navigate(`${movie?.media_type || endPoint}/${movie.id}`)}>
                                 <div className='rounded-xl mb-4 cursor-pointer relative  overflow-hidden after:absolute after:top-0 after:left-0 after:w-full after:h-full after:rounded-xl after:bg-black after:bg-opacity-40 '>
                                     <img src={`${path}${movie?.poster_path}`} className='w-full' alt={movie?.title} width="216" height="324" />
                                     <Genres data={movie?.genre_ids.slice(0, 3)} />
