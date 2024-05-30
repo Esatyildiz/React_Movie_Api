@@ -5,10 +5,10 @@ import BackdropImage from './BackdropImage';
 import DetailTopBanner from './DetailTopBanner';
 
 const Detail = () => {
-    const { url } = useParams();
     const { mediaType, id } = useParams();
-    const { data } = useFetch(`/${mediaType}/${id}`)
+    const { data } = useFetch(`/${mediaType}/${id}`);
     const { data: detail, isLoading, error } = useFetch(`/${mediaType}/${id}/credits`);
+    console.log(detail);
 
     return (
         <div className='pt-32'>

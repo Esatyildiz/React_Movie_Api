@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom';
+import useFetch from '../../hooks/useFetch';
 import CircleRating from '../home/circleRating/CircleRating';
 import './progressbar.css';
+import VideoPlayer from './VideoPlayer';
 
 const DetailTopBanner = ({ data }) => {
-    console.log(data);
-
+    const { mediaType, id } = useParams();
+    const { data: video } = useFetch(`/${mediaType}/${id}/videos`);
+    console.log(`video`, video);
     let apiDate = new Date(data?.first_air_date || data?.release_date);
 
     const date = `${apiDate.getFullYear()}`;
@@ -34,10 +38,7 @@ const DetailTopBanner = ({ data }) => {
                 </div>
                 <div className='flex items-center gap-7'>
                     <CircleRating rating={data?.vote_average.toFixed(1)} styles="!static" />
-                    <button type='button' className='flex items-center gap-3'>
-                        <img src='/img/icons/play.svg' className='w-20 h-20 object-contain' width={80} height={80} alt={data?.title} />
-                        <span className='text-xl font-medium text-white'>Fragmanı İzle</span>
-                    </button>
+                    <VideoPlayer video={video?.data?.results[0]?.key} />
                 </div>
             </div>
         </div>
