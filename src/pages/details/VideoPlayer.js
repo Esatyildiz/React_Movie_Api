@@ -4,6 +4,7 @@ import '../../movie-video.css';
 const VideoPlayer = ({ video }) => {
     const [videoOpen, setVideoOpen] = useState(false);
 
+
     return (
         <React.Fragment>
             <ModalVideo channel='youtube' autoplay isOpen={videoOpen} videoId={video} onClose={() => setVideoOpen(false)} />

@@ -2,17 +2,26 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
 import CircleRating from '../home/circleRating/CircleRating';
+import MovieInfoDetail from './MovieInfoDetail';
 import './progressbar.css';
 import VideoPlayer from './VideoPlayer';
 
-const DetailTopBanner = ({ data }) => {
+const DetailTopBanner = ({ data, detail }) => {
     const { mediaType, id } = useParams();
     const { data: video } = useFetch(`/${mediaType}/${id}/videos`);
-    console.log(`video`, video);
-    let apiDate = new Date(data?.first_air_date || data?.release_date);
+    const apiDate = new Date(data?.first_air_date || data?.release_date);
+    const releaseDate = new Date(data?.release_date || data?.first_air_date);
+    const run_time = (Math.trunc(data?.runtime / 60)) + " Saat " + (data?.runtime % 60) + " Dakika";
+
 
     const date = `${apiDate.getFullYear()}`;
+    const date2 = `${releaseDate.getMonth() + 1}.${releaseDate.getDate() + 1}.${releaseDate.getFullYear()}`
 
+    const director = detail?.crew?.filter((d) => d?.job === "Director");
+
+
+    console.log(data);
+    console.log(`detail`, detail);
 
     return (
         <div className='flex items-start gap-9'>
@@ -39,6 +48,43 @@ const DetailTopBanner = ({ data }) => {
                 <div className='flex items-center gap-7'>
                     <CircleRating rating={data?.vote_average.toFixed(1)} styles="!static" />
                     <VideoPlayer video={video?.data?.results[0]?.key} />
+                </div>
+                <div className='flex flex-col gap-2 mb-6'>
+                    <span className='text-2xl  text-white'>Genel Açıklama</span>
+                    <span className='text-lg font-normal text-white italic text-opacity-70'>{data?.overview}</span>
+                </div>
+                <div className='flex flex-col'>
+                    <div className='flex items-center gap-7 py-4 border-b border-[#ffffff1a]'>
+                        <MovieInfoDetail
+                            title="Durum :"
+                            value={data?.status}
+                        />
+                        <MovieInfoDetail
+                            title="Yayın tarihi :"
+                            value={date2}
+                        />
+                        <MovieInfoDetail
+                            title="Çalışma Süresi :"
+                            value={run_time}
+                        />
+                    </div>
+                    <div className='flex items-center gap-7 py-4 border-b border-[#ffffff1a]'>
+                        {director?.map((d, i) => {
+                            return (
+                                <MovieInfoDetail
+                                    key={i}
+                                    title="Müdür :"
+                                    value={d?.name || d?.original_name}
+                                />
+                            )
+                        })}
+                    </div>
+                    <div className='flex items-center gap-7 py-4 border-b border-[#ffffff1a]'>
+                        <MovieInfoDetail
+                            title="Yazar :"
+                            value={run_time}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
