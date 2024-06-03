@@ -18,6 +18,8 @@ const DetailTopBanner = ({ data, detail }) => {
     const date2 = `${releaseDate.getMonth() + 1}.${releaseDate.getDate() + 1}.${releaseDate.getFullYear()}`
 
     const director = detail?.crew?.filter((d) => d?.job === "Director");
+    const writter = detail?.crew?.filter((w) => w?.job === "Writter" || w?.job === "Screenplay" || w?.job === "Story");
+    console.log("yazar", writter);
 
 
     console.log(data);
@@ -80,10 +82,15 @@ const DetailTopBanner = ({ data, detail }) => {
                         })}
                     </div>
                     <div className='flex items-center gap-7 py-4 border-b border-[#ffffff1a]'>
-                        <MovieInfoDetail
-                            title="Yazar :"
-                            value={run_time}
-                        />
+                        {writter?.map((w, i) => {
+                            return (
+                                <MovieInfoDetail
+                                    key={i}
+                                    title="Yazar :"
+                                    value={w?.name || w?.original_name}
+                                />
+                            )
+                        })}
                     </div>
                 </div>
             </div>

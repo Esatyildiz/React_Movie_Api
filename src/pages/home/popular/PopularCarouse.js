@@ -11,9 +11,6 @@ import CircleRating from '../circleRating/CircleRating';
 import Genres from '../../../components/Genres/Genres';
 import { useNavigate } from 'react-router-dom';
 
-
-
-
 const PopularCarouse = ({ data: movies, isLoading, endPoint }) => {
     const path = "https://www.themoviedb.org/t/p/w440_and_h660_face";
 
@@ -23,8 +20,6 @@ const PopularCarouse = ({ data: movies, isLoading, endPoint }) => {
     // const handleClick = (id) => {
     //     navigate(`/detail/${id}`)
     // }
-
-
 
 
     // loading skeleton method
