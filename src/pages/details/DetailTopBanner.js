@@ -19,14 +19,14 @@ const DetailTopBanner = ({ data, detail }) => {
 
     const director = detail?.crew?.filter((d) => d?.job === "Director");
     const writter = detail?.crew?.filter((w) => w?.job === "Writter" || w?.job === "Screenplay" || w?.job === "Story");
-    console.log("yazar", writter);
+    const comma = writter?.map((w) => w?.name).join(",");
 
 
     console.log(data);
     console.log(`detail`, detail);
 
     return (
-        <div className='flex items-start gap-9'>
+        <div className='flex items-start gap-9 mb-11'>
             <div className='flex-shrink-0 rounded-lg overflow-hidden'>
                 <img
                     src={`https://image.tmdb.org/t/p/original/${data?.backdrop_path}`}
@@ -82,15 +82,12 @@ const DetailTopBanner = ({ data, detail }) => {
                         })}
                     </div>
                     <div className='flex items-center gap-7 py-4 border-b border-[#ffffff1a]'>
-                        {writter?.map((w, i) => {
-                            return (
-                                <MovieInfoDetail
-                                    key={i}
-                                    title="Yazar :"
-                                    value={w?.name || w?.original_name}
-                                />
-                            )
-                        })}
+                        {comma && (
+                            <MovieInfoDetail
+                                title="Yazar :"
+                                value={comma}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
