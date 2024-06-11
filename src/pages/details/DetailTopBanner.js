@@ -48,7 +48,9 @@ const DetailTopBanner = ({ data, detail }) => {
                     })}
                 </div>
                 <div className='flex items-center gap-7'>
-                    <CircleRating rating={data?.vote_average.toFixed(1)} styles="!static" />
+                    <div className='detail-progress'>
+                        <CircleRating rating={data?.vote_average.toFixed(1)} />
+                    </div>
                     <VideoPlayer video={video?.data?.results[0]?.key} />
                 </div>
                 <div className='flex flex-col gap-2 mb-6'>

@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import CircleRating from '../circleRating/CircleRating';
 import Genres from '../../../components/Genres/Genres';
+import { Link } from 'react-router-dom';
 
 const TrendCarousel = ({ movies }) => {
 
@@ -41,7 +42,9 @@ const TrendCarousel = ({ movies }) => {
             >
                 {movies && movies?.map((movie) => (
                     <SwiperSlide key={movie.id}>
-                        <div className=''>
+                        <Link to={`/movie/${movie.id}`}
+                            onClick={() => window.scrollTo(0, 0)}
+                        >
                             <div className='rounded-xl mb-4 cursor-pointer relative  overflow-hidden after:absolute after:top-0 after:left-0 after:w-full after:h-full after:rounded-xl after:bg-black after:bg-opacity-40 '>
                                 <img src={`${path}${movie?.poster_path}`} className='w-full' alt={movie?.title} width="216" height="324" />
                                 <Genres data={movie?.genre_ids.slice(0, 3)} />
@@ -49,7 +52,7 @@ const TrendCarousel = ({ movies }) => {
                             <CircleRating rating={movie?.vote_average.toFixed(1)} />
                             <a href="#!" className='text-white font-medium text-xl line-clamp-1 mb-1' alt={movie?.title}>{movie?.title}</a>
                             <span className='text-sm text-white text-opacity-50 font-medium'>{movie?.release_date}</span>
-                        </div>
+                        </Link>
                     </SwiperSlide>
                 ))}
             </Swiper>

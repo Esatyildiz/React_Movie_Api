@@ -9,10 +9,14 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import CircleRating from '../circleRating/CircleRating';
 import Genres from '../../../components/Genres/Genres';
+import { Link } from 'react-router-dom';
 
-const TopRotadetCarousel = ({ data }) => {
+const TopRotadetCarousel = ({ data, endPoint }) => {
 
     const path = "https://www.themoviedb.org/t/p/w440_and_h660_face";
+    const scrollTo = () => {
+        window.scrollTo(0, 0);
+    }
 
     return (
         <div>
@@ -42,15 +46,18 @@ const TopRotadetCarousel = ({ data }) => {
             >
                 {data?.map((movieTitle) => (
                     <SwiperSlide key={movieTitle.id}>
-                        <div className=''>
+                        <Link as={Link}
+                            to={`/${endPoint}/${movieTitle.id}`}
+                            onClick={() => scrollTo()}
+                        >
                             <div className='rounded-xl mb-4 cursor-pointer relative  overflow-hidden after:absolute after:top-0 after:left-0 after:w-full after:h-full after:rounded-xl after:bg-black after:bg-opacity-40 '>
                                 <img src={`${path}${movieTitle?.poster_path}`} className='w-full' alt={movieTitle?.title} width="216" height="324" />
                                 <Genres data={movieTitle?.genre_ids.slice(0, 3)} />
                             </div>
                             <CircleRating rating={movieTitle?.vote_average.toFixed(1)} />
-                            <a href="#!" className='text-white font-medium text-xl line-clamp-1 mb-1' alt={movieTitle?.name || movieTitle?.title}>{movieTitle?.name || movieTitle?.title}</a>
+                            <span className='text-white font-medium text-xl line-clamp-1 mb-1' alt={movieTitle?.name || movieTitle?.title}>{movieTitle?.name || movieTitle?.title}</span>
                             <span className='text-sm text-white text-opacity-50 font-medium'>{movieTitle?.release_date}</span>
-                        </div>
+                        </Link>
                     </SwiperSlide>
                 ))}
             </Swiper>

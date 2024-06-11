@@ -9,8 +9,8 @@ function classNames(...classes) {
 const TopRotadet = () => {
 
     const [tabs, setTabs] = useState([
-        { id: 0, title: "Filmler", data: false, url: "/movie/top_rated" },
-        { id: 1, title: "Tv Programları", data: false, url: "/tv/top_rated" }
+        { id: 0, title: "Filmler", title2: "movie", data: false, url: "/movie/top_rated" },
+        { id: 1, title: "Tv Programları", title2: "Tv", data: false, url: "/tv/top_rated" }
     ]);
     const [activeTopTab, setActiveTopTab] = useState(0);
 
@@ -47,6 +47,8 @@ const TopRotadet = () => {
         setActiveTopTab(index);
     }
 
+    const endPoint = tabs[activeTopTab].title2.trim().replace(/\s+/g, '-').toLowerCase();
+
     return (
         <div className='container'>
             <div className='flex justify-between'>
@@ -72,7 +74,7 @@ const TopRotadet = () => {
                 </div>
             </div>
             <div className='mt-2'>
-                <TopRotadetCarousel data={tabs[activeTopTab]?.data?.results} />
+                <TopRotadetCarousel endPoint={endPoint} data={tabs[activeTopTab]?.data?.results} />
 
             </div>
         </div>

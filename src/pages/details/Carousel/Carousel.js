@@ -9,13 +9,17 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import CircleRating from '../../home/circleRating/CircleRating';
 import Genres from '../../../components/Genres/Genres';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Carousel = ({ isLoading, data: smilar }) => {
 
     const path = "https://www.themoviedb.org/t/p/w440_and_h660_face";
 
     const navigate = useNavigate();
+
+    const scrollTo = () => {
+        window.scrollTo(0, 0);
+    }
 
     return (
         <div>
@@ -41,19 +45,20 @@ const Carousel = ({ isLoading, data: smilar }) => {
                 }}
                 autoplay="true"
                 mousewheel="false"
-
             >
                 {smilar?.map((smilarItem) => (
                     <SwiperSlide key={smilarItem?.id}>
-                        <div onClick={() => navigate(`${smilarItem?.media_type || 'movie'}/${smilarItem.id}`)}>
+                        <Link as={Link} to={`/movie/${smilarItem.id}`}
+                            onClick={() => scrollTo()}
+                        >
                             <div className='rounded-xl mb-4 cursor-pointer relative  overflow-hidden after:absolute after:top-0 after:left-0 after:w-full after:h-full after:rounded-xl after:bg-black after:bg-opacity-40 '>
                                 <img src={`${path}${smilarItem?.poster_path}`} className='w-full' alt={smilarItem?.title} width="216" height="324" />
                                 <Genres data={smilarItem?.genre_ids.slice(0, 3)} />
                             </div>
                             <CircleRating rating={smilarItem?.vote_average.toFixed(1)} />
-                            <a href="#!" className='text-white font-medium text-xl line-clamp-1 mb-1' alt={smilarItem?.title || smilarItem?.name}>{smilarItem?.title || smilarItem?.name}</a>
+                            <span className='text-white font-medium text-xl line-clamp-1 mb-1' alt={smilarItem?.title || smilarItem?.name}>{smilarItem?.title || smilarItem?.name}</span>
                             <span className='text-sm text-white text-opacity-50 font-medium'>{smilarItem?.release_date || smilarItem?.first_air_date}</span>
-                        </div>
+                        </Link>
                     </SwiperSlide>
                 ))}
             </Swiper>

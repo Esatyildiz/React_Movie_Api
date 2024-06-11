@@ -1,7 +1,6 @@
 import React from 'react'
 
 const TopCast = ({ cast }) => {
-    console.log(cast);
 
     return (
         <div className='flex flex-col mb-12'>

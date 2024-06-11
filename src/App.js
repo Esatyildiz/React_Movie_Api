@@ -9,6 +9,7 @@ import Login from './pages/login';
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchDataApi } from './utils/api';
 import { getGenres } from './store/homeSlice';
+import SearchPageResults from './pages/SearchPageResults/SearchPageResults';
 
 
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
         <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path="/:mediaType/:id" element={<Detail />} />
+        <Route path="/search/:query" element={<SearchPageResults />} />
       </Routes>
       {/* {!Login &&
         <Footer />
