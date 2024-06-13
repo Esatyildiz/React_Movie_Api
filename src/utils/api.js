@@ -20,6 +20,20 @@ export const fetchDataApi = async (url, params) => {
     }
 }
 
+export const searchApi = async (query, page) => {
+    const url = `${URL}/search/multi?query=${query}&page=${page}`;
+    const headers = {
+        Authorization: "Bearer " + TMBD_TOKEN,
+    };
+    const params = { page };
+
+    try {
+        const response = await axios.get(url, { headers, params });
+        return response.data.results;
+    } catch (error) {
+        return error;
+    }
+};
 
 
 //  eski api kodları değişecek

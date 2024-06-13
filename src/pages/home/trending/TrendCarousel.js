@@ -50,7 +50,7 @@ const TrendCarousel = ({ movies }) => {
                                 <Genres data={movie?.genre_ids.slice(0, 3)} />
                             </div>
                             <CircleRating rating={movie?.vote_average.toFixed(1)} />
-                            <a href="#!" className='text-white font-medium text-xl line-clamp-1 mb-1' alt={movie?.title}>{movie?.title}</a>
+                            <span className='text-white font-medium text-xl line-clamp-1 mb-1' alt={movie?.title}>{movie?.title}</span>
                             <span className='text-sm text-white text-opacity-50 font-medium'>{movie?.release_date}</span>
                         </Link>
                     </SwiperSlide>
