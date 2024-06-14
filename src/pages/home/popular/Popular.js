@@ -16,6 +16,7 @@ const Popular = () => {
     ]);
 
     const [activeTab, setActiveTab] = useState(0);
+    const { isLoading } = useFetch();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -76,7 +77,7 @@ const Popular = () => {
             </div>
             <div className="mt-2">
                 <div>
-                    <PopularCarouse isLoading={false} endPoint={endPoint} data={tabs[activeTab].data?.results} />
+                    <PopularCarouse isLoading={isLoading} endPoint={endPoint} data={tabs[activeTab].data?.results} />
                 </div>
             </div>
         </div>

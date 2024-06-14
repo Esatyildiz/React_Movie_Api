@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
+import Img from '../../components/LazyLoadImage/Img';
 import useFetch from '../../hooks/useFetch';
 import CircleRating from '../home/circleRating/CircleRating';
 import MovieInfoDetail from './MovieInfoDetail';
@@ -28,9 +29,9 @@ const DetailTopBanner = ({ data, detail }) => {
     return (
         <div className='flex items-start gap-9 mb-11'>
             <div className='flex-shrink-0 rounded-lg overflow-hidden'>
-                <img
+                <Img
                     src={`https://image.tmdb.org/t/p/original/${data?.backdrop_path}`}
-                    className="h-[525px] object-cover object-center"
+                    className="h-[525px] w-[350px] object-cover object-center"
                     alt="image"
                     height="525"
                     width="350"

@@ -10,6 +10,7 @@ import 'swiper/css/scrollbar';
 import CircleRating from '../circleRating/CircleRating';
 import Genres from '../../../components/Genres/Genres';
 import { Link } from 'react-router-dom';
+import Img from '../../../components/LazyLoadImage/Img';
 
 const TrendCarousel = ({ movies }) => {
 
@@ -46,7 +47,7 @@ const TrendCarousel = ({ movies }) => {
                             onClick={() => window.scrollTo(0, 0)}
                         >
                             <div className='rounded-xl mb-4 cursor-pointer relative  overflow-hidden after:absolute after:top-0 after:left-0 after:w-full after:h-full after:rounded-xl after:bg-black after:bg-opacity-40 '>
-                                <img src={`${path}${movie?.poster_path}`} className='w-full' alt={movie?.title} width="216" height="324" />
+                                <Img src={`${path}${movie?.poster_path}`} className='w-full h-[325px]' alt={movie?.title} width="216" height="324" />
                                 <Genres data={movie?.genre_ids.slice(0, 3)} />
                             </div>
                             <CircleRating rating={movie?.vote_average.toFixed(1)} />

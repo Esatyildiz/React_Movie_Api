@@ -17,7 +17,7 @@ const OpenSearch = () => {
     // const { data: searchData } = useFetch(`/search/multi?query=${query}&page=${page}`);
     // const { data: searchData } = searchApi(inputDebounce, page);
 
-    const { data: searchData } = useFetch(`/search/multi?query=${inputDebounce}&page=${page}`);
+    const { data: searchData } = useFetch(`/search/movie?query=${inputDebounce}&page=${page}`);
 
     console.log("arama", searchData);
 
@@ -29,7 +29,6 @@ const OpenSearch = () => {
 
     const handleSearchChange = (e) => {
         setQuery(e.target.value);
-        console.log(query);
     }
 
     useEffect(() => {
@@ -38,7 +37,6 @@ const OpenSearch = () => {
         }
     }, [searchData])
 
-    console.log(totalCount, "sayısı");
 
     return (
         <div>

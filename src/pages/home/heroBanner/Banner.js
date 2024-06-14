@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Img from '../../../components/LazyLoadImage/Img';
 import { fetchUpcoming } from '../../../utils/api';
 import HeroBannerContent from './HeroBannerContent';
 
@@ -40,7 +41,7 @@ const Banner = () => {
             <div className='absolute w-full h-full top-0 left-0 opacity-50 overflow-hidden'>
                 <div className='blur-0 w-full h-full'>
                     {path.length > 0 &&
-                        <img className="w-full h-full object-cover" alt="" src={`${urlPath}${path[randomImdex]?.backdrop_path}`} />
+                        <Img className="w-full h-full object-cover" alt="" src={`${urlPath}${path[randomImdex]?.backdrop_path}`} />
                     }
                 </div>
                 <div className='bg-gradiend-filter w-full h-64 absolute bottom-0 left-0'></div>

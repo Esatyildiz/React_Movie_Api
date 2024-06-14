@@ -10,6 +10,7 @@ import 'swiper/css/scrollbar';
 import CircleRating from '../../home/circleRating/CircleRating';
 import Genres from '../../../components/Genres/Genres';
 import { Link, useNavigate } from 'react-router-dom';
+import Img from '../../../components/LazyLoadImage/Img';
 
 const Carousel = ({ isLoading, data: smilar }) => {
 
@@ -52,7 +53,7 @@ const Carousel = ({ isLoading, data: smilar }) => {
                             onClick={() => scrollTo()}
                         >
                             <div className='rounded-xl mb-4 cursor-pointer relative  overflow-hidden after:absolute after:top-0 after:left-0 after:w-full after:h-full after:rounded-xl after:bg-black after:bg-opacity-40 '>
-                                <img src={`${path}${smilarItem?.poster_path}`} className='w-full' alt={smilarItem?.title} width="216" height="324" />
+                                <Img src={`${path}${smilarItem?.poster_path}`} className='w-full h-[325px]' alt={smilarItem?.title} width="216" height="324" />
                                 <Genres data={smilarItem?.genre_ids.slice(0, 3)} />
                             </div>
                             <CircleRating rating={smilarItem?.vote_average.toFixed(1)} />

@@ -1,4 +1,5 @@
 import React from 'react'
+import Img from '../../../components/LazyLoadImage/Img'
 
 const TopCast = ({ cast }) => {
 
@@ -11,7 +12,7 @@ const TopCast = ({ cast }) => {
                         <div
                             key={i}
                             className='flex flex-col items-center justify-center whitespace-nowrap flex-shrink-0'>
-                            <img src={`https://image.tmdb.org/t/p/original/${c?.profile_path}`} width={208} height={208} className='w-52 h-52 object-cover mb-3 rounded-full' alt={c?.name} />
+                            <Img src={`https://image.tmdb.org/t/p/original/${c?.profile_path}`} width={208} height={208} className='w-52 h-52 object-cover mb-3 rounded-full' alt={c?.name} />
                             <span className='text-lg font-medium text-white'>{c?.name}</span>
                             <span className='text-base text-opacity-50 italic font-medium text-white'>{c?.character}</span>
                         </div>
